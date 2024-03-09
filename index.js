@@ -19,7 +19,7 @@ db.sequelize.sync();//{force:false}
 
 app.get("/", (req, res) => {
     console.log('API is up!');
-    res.json({ message: "server is up now." });
+    res.json({ message: "Welcome to Esales application." });
 });
 
 
@@ -44,7 +44,7 @@ app.post("/Users/createUsers",(req,res)=>{
  controller.createUsers(req,res);
 });
 
-//fetch users.
+//fetch users detail.
 app.get("/Users/getUsers",verifyToken,function(req, res){
   controller.findAllUsers(req,res);
 });
@@ -59,7 +59,7 @@ app.get("/Users/getUserByName", verifyToken,function(req, res){
   controller.findUserByName(req,res);
 });
 
-//fetch single users using query param.
+//update single users using put.
 app.put("/Users/updateUsersDetail", verifyToken,function(req, res){
   controller.updateUsers(req,res);
 });
@@ -74,6 +74,7 @@ app.post("/Users/userSignIn", function(req, res){
   controller.signInUser(req,res);
 });
 
+//check port running.
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
