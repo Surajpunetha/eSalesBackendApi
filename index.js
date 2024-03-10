@@ -4,12 +4,13 @@ const bodyParser = require('body-parser');
 const db = require('./database/connectionDb');
 const controller = require('./controller/user_controller');
 const res = require("express/lib/response");
+var http = require('http');
 
 var jwt = require('jsonwebtoken');
 const config = require("./config/jwt.config");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000
 
 app.use(bodyParser.json());
 app.use(express.json());
@@ -74,7 +75,16 @@ app.post("/Users/userSignIn", function(req, res){
   controller.signInUser(req,res);
 });
 
-//check port running.
-app.listen(port, () => {
+//check server running in local.
+/* app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
+}); */
+
+//check server listening in live.
+var server = http.createServer((req, res) => {
+  console.log("Server is creaated.");
+});
+  
+server.listen(port || 80, () => {
+    console.log("Listening on port:"+port);
 });
