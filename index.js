@@ -81,10 +81,9 @@ app.post("/Users/userSignIn", function(req, res){
 }); */
 
 //check server listening in live.
-var server = http.createServer((req, res) => {
-  console.log("Server is creaated.");
+const server = http.createServer(app);
+
+server.listen(port, '0.0.0.0', () => {
+  console.log(`app listening at http://0.0.0.0:${port}`);
 });
-  
-server.listen(port || 80, () => {
-    console.log("Listening on port:"+port);
-});
+
